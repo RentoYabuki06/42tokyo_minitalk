@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/20 15:31:05 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/08/02 16:59:22 by yabukirento      ###   ########.fr       */
+/*   Created: 2024/08/02 16:54:32 by yabukirento       #+#    #+#             */
+/*   Updated: 2024/08/02 16:58:59 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 void	ft_handler(int sig, siginfo_t *info, void *context)
 {
@@ -26,7 +26,7 @@ void	ft_handler(int sig, siginfo_t *info, void *context)
 		if (c == '\0')
 		{
 			write(1, "\n", 1);
-			kill(info->si_pid, SIGUSR1);
+			kill(info->si_pid, SIGUSR2);
 		}
 		else
 			write(1, &c, 1);

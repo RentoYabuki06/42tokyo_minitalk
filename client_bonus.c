@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/02 16:30:53 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/08/02 16:58:48 by yabukirento      ###   ########.fr       */
+/*   Created: 2024/08/02 16:53:54 by yabukirento       #+#    #+#             */
+/*   Updated: 2024/08/02 16:59:42 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 void	ft_send_signal(int pid, char *message, int i)
 {
@@ -40,6 +40,15 @@ void	ft_send_signal(int pid, char *message, int i)
 	}
 }
 
+void	ft_signal_handler_client(int sig)
+{
+	if (sig == SIGUSR2)
+	{
+		write(1, "Message successfully sent!\n", 27);
+		exit(0);
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	int		pid;
@@ -56,6 +65,7 @@ int	main(int argc, char **argv)
 		write(1, "Error: Invalid PID.\n", 20);
 		return (1);
 	}
+	signal(SIGUSR2, ft_signal_handler_client);
 	message = argv[2];
 	ft_send_signal(pid, message, 0);
 	return (0);
