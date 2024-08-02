@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:54:32 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/08/02 16:58:59 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/08/02 17:30:49 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	main(void)
 {
 	struct sigaction	sa;
 
+	sigemptyset(&sa.sa_mask);
 	write(1, "Server PID: ", 12);
 	ft_putnbr_fd(getpid(), 1);
 	write(1, "\n", 1);

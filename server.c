@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:31:05 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/08/02 16:59:22 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/08/02 17:30:45 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_handler(int sig, siginfo_t *info, void *context)
 		if (c == '\0')
 		{
 			write(1, "\n", 1);
-			kill(info->si_pid, SIGUSR1);
+			kill(info->si_pid, SIGUSR2);
 		}
 		else
 			write(1, &c, 1);
@@ -39,6 +39,7 @@ int	main(void)
 {
 	struct sigaction	sa;
 
+	sigemptyset(&sa.sa_mask);
 	write(1, "Server PID: ", 12);
 	ft_putnbr_fd(getpid(), 1);
 	write(1, "\n", 1);
