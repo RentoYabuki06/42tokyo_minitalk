@@ -6,51 +6,42 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:30:53 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/08/02 17:32:36 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/08/14 22:24:58 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	ft_send_signal(int pid, char *message, int i)
+int	ft_send_signal(int pid, char message)
 {
-	while (*message)
-	{
-		i = 0;
-		while (i < 8)
-		{
-			if (*message & (1 << i))
-				kill(pid, SIGUSR1);
-			else
-				kill(pid, SIGUSR2);
-			usleep(100);
-			i++;
-		}
-		message++;
-	}
-	i = 0;
-	while (i < 8)
-	{
-		if ('\0' & (1 << i))
-			kill(pid, SIGUSR1);
-		else
-			kill(pid, SIGUSR2);
-		usleep(100);
-		i++;
-	}
-}
+	int				i;
+	int				result;
+	unsigned char	c;
 
-void	ft_signal_handler_client(int sig)
-{
-	if (sig == SIGUSR2)
+	i = 8;
+	c = message;
+	while (i--)
 	{
-		exit(0);
+		if (c & 128)
+			result = kill(pid, SIGUSR1);
+		else if (!(c & 128))
+			result = kill(pid, SIGUSR2);
+		if (result == -1)
+		{
+			write(1, "Error: Invalid PID.\n", 20);
+			return (1);
+		}
+		c = c << 1;
+		usleep(100);
 	}
+	return (0);
 }
 
 int	main(int argc, char **argv)
 {
 	int		pid;
+	int		i;
+	int		result;
 	char	*message;
 
 	if (argc != 3 || !ft_isdigit(*argv[1]))
@@ -64,8 +55,13 @@ int	main(int argc, char **argv)
 		write(1, "Error: Invalid PID.\n", 20);
 		return (1);
 	}
-	signal(SIGUSR2, ft_signal_handler_client);
 	message = argv[2];
-	ft_send_signal(pid, message, 0);
+	i = -1;
+	while (message[++i])
+	{
+		result = ft_send_signal(pid, message[i]);
+		if (result == 1)
+			return (0);
+	}
 	return (0);
 }

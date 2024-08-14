@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk_bonus.h                                   :+:      :+:    :+:   */
+/*   ft_printnbr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/02 16:53:28 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/08/02 16:59:30 by yabukirento      ###   ########.fr       */
+/*   Created: 2024/05/03 14:51:00 by yabukirento       #+#    #+#             */
+/*   Updated: 2024/05/04 15:47:47 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_BONUS_H
-# define MINITALK_BONUS_H
+#include "ft_printf.h"
 
-# include <limits.h>
-# include <signal.h>
-# include <stdlib.h>
-# include <unistd.h>
+int	ft_printnbr(int a)
+{
+	int		count;
+	char	*tmp;
 
-int		ft_atoi(const char *str);
-int		ft_isdigit(int c);
-void	ft_putnbr_fd(int n, int fd);
-void	ft_send_signal(int pid, char *message, int i);
-void	ft_signal_handler_client(int sig);
-void	ft_handler(int sig, siginfo_t *info, void *context);
-
-#endif
+	tmp = ft_itoa(a);
+	if (!tmp)
+		return (-1);
+	count = ft_printstr(tmp);
+	free(tmp);
+	return (count);
+}

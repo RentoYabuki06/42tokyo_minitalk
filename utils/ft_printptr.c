@@ -1,29 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_printa.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/20 17:39:29 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/08/14 19:24:08 by yabukirento      ###   ########.fr       */
+/*   Created: 2024/05/03 14:45:53 by yabukirento       #+#    #+#             */
+/*   Updated: 2024/05/03 16:33:41 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "ft_printf.h"
 
-# include <limits.h>
-# include <signal.h>
-# include <stdlib.h>
-# include <unistd.h>
+int	ft_printptr(unsigned long long a)
+{
+	int	len_str;
 
-int		ft_atoi(const char *str);
-int		ft_isdigit(int c);
-void	ft_putnbr_fd(int n, int fd);
-int		ft_send_signal(int pid, char message);
-// void	ft_signal_handler_client(int sig);
-void	ft_handler(int sig);
-int		ft_printf(const char *format, ...);
-
-#endif
+	len_str = 0;
+	if (0 <= write(1, "0x", 2))
+		len_str += 2;
+	else
+		return (-1);
+	if (a == 0)
+	{
+		if (0 <= write(1, "0", 1))
+			len_str++;
+		else
+			return (-1);
+	}
+	else
+	{
+		if (0 > ft_put_hex(a, 1))
+			return (-1);
+		len_str += ft_hex_len(a);
+	}
+	return (len_str);
+}

@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_printstr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/20 17:39:29 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/08/14 19:24:08 by yabukirento      ###   ########.fr       */
+/*   Created: 2024/05/03 14:42:47 by yabukirento       #+#    #+#             */
+/*   Updated: 2024/05/04 17:36:46 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "ft_printf.h"
 
-# include <limits.h>
-# include <signal.h>
-# include <stdlib.h>
-# include <unistd.h>
+static size_t	ft_strlen(const char *str)
+{
+	size_t	count;
 
-int		ft_atoi(const char *str);
-int		ft_isdigit(int c);
-void	ft_putnbr_fd(int n, int fd);
-int		ft_send_signal(int pid, char message);
-// void	ft_signal_handler_client(int sig);
-void	ft_handler(int sig);
-int		ft_printf(const char *format, ...);
+	count = 0;
+	while (str[count])
+		count++;
+	return (count);
+}
 
-#endif
+int	ft_printstr(const char *str)
+{
+	if (!str)
+		return (write(1, "(null)", 6));
+	return (write(1, str, ft_strlen(str)));
+}
