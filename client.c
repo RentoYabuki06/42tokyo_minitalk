@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:30:53 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/08/14 22:24:58 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/08/18 18:23:57 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ int	ft_send_signal(int pid, char message)
 			result = kill(pid, SIGUSR2);
 		if (result == -1)
 		{
-			write(1, "Error: Invalid PID.\n", 20);
-			return (1);
+			write(1, "Error: Failed to send termination signal.\n", 42);
+			return (-1);
 		}
 		c = c << 1;
-		usleep(100);
+		usleep(1000);
 	}
 	return (0);
 }
@@ -60,7 +60,7 @@ int	main(int argc, char **argv)
 	while (message[++i])
 	{
 		result = ft_send_signal(pid, message[i]);
-		if (result == 1)
+		if (result == -1)
 			return (0);
 	}
 	return (0);

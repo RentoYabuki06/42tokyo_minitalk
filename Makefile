@@ -6,7 +6,7 @@
 #    By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/02 16:47:36 by yabukirento       #+#    #+#              #
-#    Updated: 2024/08/14 22:25:10 by yabukirento      ###   ########.fr        #
+#    Updated: 2024/08/18 17:55:48 by yabukirento      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ OBJS_CLIENT = $(SRCS_CLIENT:.c=.o)
 # SRCS_CLIENT_BONUS = client_bonus.c utils.c
 # OBJS_SERVER_BONUS = $(SRCS_SERVER_BONUS:.c=.o)
 # OBJS_CLIENT_BONUS = $(SRCS_CLIENT_BONUS:.c=.o)
-
 
 all: server client
 
