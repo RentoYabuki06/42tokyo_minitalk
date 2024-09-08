@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:30:53 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/08/18 18:23:57 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/08 09:23:07 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int argc, char **argv)
 	int		result;
 	char	*message;
 
-	if (argc != 3 || !ft_isdigit(*argv[1]))
+	if (argc != 3)
 	{
 		write(1, "Usage: ./client [server_pid] [message]\n", 39);
 		return (1);

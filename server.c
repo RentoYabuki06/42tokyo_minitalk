@@ -6,7 +6,7 @@
 /*   By: yabukirento <yabukirento@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/20 15:31:05 by yabukirento       #+#    #+#             */
-/*   Updated: 2024/08/18 18:22:28 by yabukirento      ###   ########.fr       */
+/*   Updated: 2024/09/08 09:32:53 by yabukirento      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void	ft_handler(int sig)
 {
-	static int		bit_count = 0;
-	static unsigned char c = 0;
+	static int				bit_count = 0;
+	static unsigned char	c = 0;
 
-	if (sig == SIGUSR1) c = c << 1 | 1;
-	else if (sig == SIGUSR2) c = c << 1;
+	if (sig == SIGUSR1)
+		c = c << 1 | 1;
+	else if (sig == SIGUSR2)
+		c = c << 1;
 	bit_count++;
 	if (bit_count == 8)
 	{
@@ -27,8 +29,6 @@ void	ft_handler(int sig)
 		c = 0;
 	}
 }
-
-
 
 int	main(void)
 {
